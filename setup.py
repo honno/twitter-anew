@@ -7,7 +7,7 @@ from subprocess import call
 
 from setuptools import Command, find_packages, setup
 
-from skele import __version__
+from tanew import __version__
 
 
 this_dir = abspath(dirname(__file__))
@@ -33,14 +33,14 @@ class RunTests(Command):
 
 
 setup(
-    name = 'skele',
+    name = 'tanew',
     version = __version__,
-    description = 'A skeleton command line program in Python.',
+    description = '',
     long_description = long_description,
-    url = 'https://github.com/rdegges/skele-cli',
-    author = 'Randall Degges',
-    author_email = 'r@rdegges.com',
-    license = 'UNLICENSE',
+    url = '',
+    author = '',
+    author_email = '',
+    license = '',
     classifiers = [
         'Intended Audience :: Developers',
         'Topic :: Utilities',
@@ -63,7 +63,7 @@ setup(
     },
     entry_points = {
         'console_scripts': [
-            'skele=skele.cli:main',
+            'tanew=tanew.cli:main',
         ],
     },
     cmdclass = {'test': RunTests},

@@ -2,24 +2,18 @@
 tanew
 
 Usage:
-  tanew status  
-  tanew linkaccount  
-  tanew generatelists [-n]  
-  tanew backup <file> [-n]  
-  tanew unfollowall [-n]  
-  tanew -h | --help  
-  tanew --version  
+  tanew status
+  tanew linkaccount
+  tanew [-n] generatelists
+  tanew [-n] backup <file>
+  tanew [-n] unfollowall
+  tanew -h, --help
+  tanew --version
 
 Options:
-  -n --no-act  
-  -h --help  
-  --version  
-
-Examples:
-  skele status
-
-Help:
-  Hmmmm
+  -n, --no-act
+  -h, --help
+  --version
 """
 
 from inspect import getmembers, isclass
@@ -32,7 +26,7 @@ def main():
     import commands
     options = docopt(__doc__, version=VERSION)
 
-    for k, v in options.items():
+    for k, v in options.iteritems():
         if hasattr(commands, k):
             module = getattr(commands, k)
             commands = getmembers(module, isclass)

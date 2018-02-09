@@ -1,4 +1,4 @@
-# tanew/commands/base.py
+kele/commands/base.py
 """The base command."""
 
 
