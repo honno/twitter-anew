@@ -1,6 +1,6 @@
 from json import dumps
 
-from base import Base
+from .base import Base
 
 class Status(Base):
     def run(self):
