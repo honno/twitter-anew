@@ -33,7 +33,7 @@ from json import load
 from __init__ import __version__ as VERSION
 
 def main():
-    """Access your twitter application"""
+    """Access twitter application"""
     auth = None
 
     app_file = open('app.json')
@@ -45,9 +45,9 @@ def main():
     """CLI"""
     import commands
     options = docopt(__doc__, version=VERSION)
-
+    
     for k, v in options.items():
-        if hasattr(commands, k):
+        if hasattr(commands, k) and v:
             module = getattr(commands, k)
             commands = getmembers(module, isclass)
             command = [command[1] for command in commands if command[0] != 'Base'][0]

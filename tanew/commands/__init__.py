@@ -1,2 +1,2 @@
-#from .status import *
+from .status import *
 from .linkaccount import *
