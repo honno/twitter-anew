@@ -6,6 +6,8 @@ import json
 
 import tweepy
 
+from .parse_te import *
+
 class Status(Base):
     def run(self, auth):
         try:
@@ -30,6 +32,4 @@ class Status(Base):
         except json.decoder.JSONDecodeError as jde:
             print("Account access tokens not found in access_tokens.json")
         except tweepy.TweepError as te:
-            json_reason = str(te)[1:-1].replace('\'', '"')
-            reason = json.loads(json_reason)
-            print(reason['message'] + " (Code {})".format(reason['code']))
+            print(parse_te(te))
