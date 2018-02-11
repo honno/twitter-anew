@@ -43,7 +43,7 @@ def main():
         secret = app['secret']
         auth = tweepy.OAuthHandler(key, secret)
 
-        auth._get_request_token()
+        #print(auth.get_authorization_url())
 
         """CLI"""
         import commands
@@ -61,4 +61,4 @@ def main():
         print(jde.msg + " in app.json file")
     except tweepy.TweepError as te:
         print(parse_te(te))
-        print("Possible application pointed to in app.json does not exist?")
+        print("Possibly the application pointed to in app.json does not exist?")

@@ -32,4 +32,5 @@ class Status(Base):
         except json.decoder.JSONDecodeError as jde:
             print("Account access tokens not found in access_tokens.json")
         except tweepy.TweepError as te:
+            print(te)
             print(parse_te(te))

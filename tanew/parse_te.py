@@ -5,9 +5,9 @@ from re import search as regex_search
 def parse_te(te):
     string = ""
     try:
-        json_reason = regex_search('\[(\{.+\})\]', str(te)).group(1)
+        json_reason = regex_search('\[(\{.+\})\]', str(te)).group(1).replace('\'', '"')
         reason = loads(json_reason)
-        string = reason['message'] + " (Code {})".format(reason['code'])
+        string = "Twitter API: {} (Code {})".format(reason['message'], reason['code'])
     except AttributeError:
         string = te
     finally:
