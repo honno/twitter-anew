@@ -21,6 +21,5 @@ class Status(Base):
             print("{} is linked".format(username))
             print("Number of accounts {} is following: {}".format(username, following_no))
             
-
         except tweepy.TweepError as te:
             print(parse_te(te))
