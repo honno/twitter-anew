@@ -4,7 +4,7 @@ tanew
 Usage:
   tanew status  
   tanew linkaccount  
-  tanew generatelists [-n]  
+  tanew createlists [-n]  
   tanew backup <file> [-n]  
   tanew unfollowall [-n]  
   tanew -h | --help  
