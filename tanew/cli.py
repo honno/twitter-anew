@@ -43,7 +43,17 @@ def main():
         secret = app['secret']
         auth = tweepy.OAuthHandler(key, secret)
 
-        #print(auth.get_authorization_url())
+        access_tokens_file = open('access_tokens.json')
+        access_tokens = json.load(access_tokens_file)
+
+        try:
+            token = access_tokens['token']
+            token_secret = access_tokens['token_secret']
+
+            auth.set_access_token(token, token_secret)
+            
+        except Exception:
+            pass
 
         """CLI"""
         import commands
