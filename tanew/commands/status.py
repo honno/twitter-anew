@@ -23,5 +23,4 @@ class Status(Base):
             
 
         except tweepy.TweepError as te:
-            print(te)
             print(parse_te(te))
