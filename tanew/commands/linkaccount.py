@@ -24,13 +24,22 @@ class LinkAccount(Base):
             
             pin = input("Press enter pin given to continue:\n")
             
-            access_token, access_token_secret = auth.get_access_token(pin)
+            token, token_secret = auth.get_access_token(pin)
 
             tokens = {}
-            tokens['token'] = access_token
-            tokens['token_secret'] = access_token_secret
+            tokens['token'] = token
+            tokens['token_secret'] = token_secret
+
+            
+            auth.set_access_token(token, token_secret)
+
+            print("Account authorized successfully!")
             
             with open('access_tokens.json', 'w+') as f:
                 dump(tokens, f)
+
+            print("Access tokens stored at access_tokens.json")
+
+                
         except TweepError as te:
             print(parse_te(te))
