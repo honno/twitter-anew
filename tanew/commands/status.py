@@ -6,7 +6,7 @@ import json
 
 import tweepy
 
-from .parse_te import *
+from parse_te import *
 
 class Status(Base):
     def run(self, auth):

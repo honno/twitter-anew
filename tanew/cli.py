@@ -26,30 +26,39 @@ from inspect import getmembers, isclass
 
 from docopt import docopt
 
-from tweepy import OAuthHandler
+import tweepy
 
-from json import load
+import json
+
+from parse_te import *
 
 from __init__ import __version__ as VERSION
 
 def main():
-    """Access twitter application"""
-    auth = None
+    try:
+        app_file = open('app.json')
 
-    app_file = open('app.json')
-    app = load(app_file)
-    key = app['key']
-    secret = app['secret']
-    auth = OAuthHandler(key, secret)
+        app = json.load(app_file)
+        key = app['key']
+        secret = app['secret']
+        auth = tweepy.OAuthHandler(key, secret)
 
-    """CLI"""
-    import commands
-    options = docopt(__doc__, version=VERSION)
+        auth._get_request_token()
+
+        """CLI"""
+        import commands
+        options = docopt(__doc__, version=VERSION)
     
-    for k, v in options.items():
-        if hasattr(commands, k) and v:
-            module = getattr(commands, k)
-            commands = getmembers(module, isclass)
-            command = [command[1] for command in commands if command[0] != 'Base'][0]
-            command = command(options)
-            command.run(auth)
+        for k, v in options.items():
+            if hasattr(commands, k) and v:
+                module = getattr(commands, k)
+                commands = getmembers(module, isclass)
+                command = [command[1] for command in commands if command[0] != 'Base'][0]
+                command = command(options)
+                command.run(auth)
+                
+    except json.decoder.JSONDecodeError as jde:
+        print(jde.msg + " in app.json file")
+    except tweepy.TweepError as te:
+        print(parse_te(te))
+        print("Possible application pointed to in app.json does not exist?")
