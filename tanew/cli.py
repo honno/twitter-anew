@@ -43,10 +43,10 @@ def main():
         secret = app['secret']
         auth = tweepy.OAuthHandler(key, secret)
 
-        access_tokens_file = open('access_tokens.json')
-        access_tokens = json.load(access_tokens_file)
-
         try:
+            access_tokens_file = open('access_tokens.json')
+            access_tokens = json.load(access_tokens_file)
+            
             token = access_tokens['token']
             token_secret = access_tokens['token_secret']
 
@@ -66,6 +66,10 @@ def main():
                 command = [command[1] for command in commands if command[0] != 'Base'][0]
                 command = command(options)
                 command.run(auth)
+
+    except FileNotFoundError as fnfe:
+        if(fnfe.filename == 'app.json'):
+                print('No application linked to program (app.json)')
                 
     except json.decoder.JSONDecodeError as jde:
         print(jde.msg + " in app.json file")
