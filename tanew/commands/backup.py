@@ -6,6 +6,8 @@ from parse_te import *
 
 import tweepy
 
+from time import sleep
+
 DEFAULT_BACKUP_FILENAME = 'backup.txt'
 
 class Backup(Status):
@@ -21,10 +23,23 @@ class Backup(Status):
                 filename = DEFAULT_BACKUP_FILENAME
             
             api = tweepy.API(auth)
-            friends = tweepy.Cursor(api.friends_ids)
-        
+            friends_ids_cursor = tweepy.Cursor(api.friends_ids).items()
+
+            friends_ids = []
+
+            while True:
+                try:
+                    friends_ids.append(friends_ids_cursor.next())
+                except tweepy.RateLimitError:
+                    sleep(1)
+                    continue
+                except StopIteration:
+                    break
+            
             with open(filename, 'w+') as f:
-                for friend in friends.items():
+                f.write("List of friend ids followed by {}".format(auth.get_username()))
+                f.write('\n\n')
+                for friend in friends_ids:
                     f.write(friend.__str__())
                     f.write('\n')
 
