@@ -1,6 +1,11 @@
 # Twitter Anew stuff
 *.json
 
+# Working with required packages
+docopt*
+tweepy*
+requests_oauthlib*
+
 # Emacs stuff
 *~
 \#*\#
