@@ -68,8 +68,7 @@ def main():
                 command.run(auth)
 
     except FileNotFoundError as fnfe:
-        if(fnfe.filename == 'app.json'):
-                print('No application linked to program (app.json)')
+        print('No application linked to program (app.json)')
                 
     except json.decoder.JSONDecodeError as jde:
         print(jde.msg + " in app.json file")
