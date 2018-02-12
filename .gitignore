@@ -1,5 +1,6 @@
 # Twitter Anew stuff
 *.json
+*.txt
 
 # Working with required packages
 docopt*
