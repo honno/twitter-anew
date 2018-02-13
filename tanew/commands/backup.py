@@ -12,18 +12,23 @@ DEFAULT_BACKUP_FILENAME = 'backup.txt'
 
 class Backup(Status):
     def run(self, auth):
+        super().run(auth)
+
+        print(self.options)
+        
         try:
-            super().run(auth)
             
             file_arg = self.options['<file>']
-            
-            if file_arg != None:
-                filename = file_arg
-            else:
-                filename = DEFAULT_BACKUP_FILENAME
+            filename = file_arg if file_arg != None else DEFAULT_BACKUP_FILENAME
+
+            user_id = self.options['--user-id']
             
             api = tweepy.API(auth)
-            friends_ids_cursor = tweepy.Cursor(api.friends_ids).items()
+
+            if user_id != None:
+                friends_ids_cursor = tweepy.Cursor(api.friends_ids, id=user_id).items()
+            else:
+                friends_ids_cursor = tweepy.Cursor(api.friends_ids).items()
 
             friends_ids = []
 

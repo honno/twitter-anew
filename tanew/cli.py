@@ -5,7 +5,7 @@ Usage:
   tanew status  
   tanew linkaccount  
   tanew createlists [-n]  
-  tanew backup [<file>]
+  tanew backup [<file>] [--user-id=id]
   tanew unfollowall [-n]
   tanew followall [<file>]  
   tanew -h | --help  
