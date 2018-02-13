@@ -6,7 +6,8 @@ Usage:
   tanew linkaccount  
   tanew createlists [-n]  
   tanew backup [<file>]
-  tanew unfollowall [-n]  
+  tanew unfollowall [-n]
+  tanew followall [<file>]  
   tanew -h | --help  
   tanew --version  
 

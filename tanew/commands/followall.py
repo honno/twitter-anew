@@ -1,0 +1,50 @@
+import tweepy
+
+from .base import Base
+
+from .backup import DEFAULT_BACKUP_FILENAME
+
+from parse_te import *
+
+class FollowAll(Base):
+    def run(self, auth):
+        try:
+            file_param = self.options['<file>']
+            filename = file_param if file_param != None else DEFAULT_BACKUP_FILENAME
+            api = tweepy.API(auth)
+
+            friends_ids = []
+            
+            with open(filename, 'r') as f:
+                for line in f:
+                    try:
+                        id = int(line.rstrip('\n'))
+                        friends_ids.append(line.rstrip('\n'))
+                    except ValueError:
+                        pass
+            friends_no = friends_ids.__len__()
+            
+            if friends_no != 0:
+
+                friends_ids_iter = iter(friends_ids)
+                while True:
+                    try:
+
+                        api.create_friendship(friends_ids_iter.__next__())
+                    except tweepy.RateLimitError:
+                        sleep(1)
+                        continue
+                    except StopIteration:
+                        break
+
+                print("Jobs done!")
+            else:
+                print("No friend ids in {}".format(filename))
+
+
+                    
+        except tweepy.TweepError as te:
+            print(parse_te(te))
+
+        except FileNotFoundError as fnfe:
+            prin(fnfe)
