@@ -2,7 +2,7 @@ import tweepy
 
 from .base import Base
 
-from parse_te import *
+import util
 
 from time import sleep
 
@@ -25,6 +25,6 @@ class UnfollowAll(Base):
             print("Unfollowed everybody!")
                 
         except tweepy.TweepError as te:
-            print(parse_te(te))
+            print(util.parse_te(te))
 
         

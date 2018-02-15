@@ -4,8 +4,8 @@ tanew
 Usage:
   tanew status  
   tanew linkaccount  
-  tanew createlists [-n]  
-  tanew backup [<file>] [--user-id=id]
+  tanew createlists [<file>] [-n] [--list-name=<name>] [--list-mode=<mode>]
+  tanew backup [<file>] [--user-id=<id>]
   tanew unfollowall [-n]
   tanew followall [<file>]  
   tanew -h | --help  
@@ -31,7 +31,8 @@ import tweepy
 
 import json
 
-from parse_te import *
+from util import *
+from meta import *
 
 from __init__ import __version__ as VERSION
 

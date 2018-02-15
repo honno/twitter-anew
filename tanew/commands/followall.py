@@ -4,7 +4,10 @@ from .base import Base
 
 from .backup import DEFAULT_BACKUP_FILENAME
 
-from parse_te import *
+from time import sleep
+
+
+import util
 
 class FollowAll(Base):
     def run(self, auth):
@@ -13,15 +16,7 @@ class FollowAll(Base):
             filename = file_param if file_param != None else DEFAULT_BACKUP_FILENAME
             api = tweepy.API(auth)
 
-            friends_ids = []
-            
-            with open(filename, 'r') as f:
-                for line in f:
-                    try:
-                        id = int(line.rstrip('\n'))
-                        friends_ids.append(line.rstrip('\n'))
-                    except ValueError:
-                        pass
+            friends_ids = read(filename)
             friends_no = friends_ids.__len__()
             
             if friends_no != 0:
@@ -44,7 +39,7 @@ class FollowAll(Base):
 
                     
         except tweepy.TweepError as te:
-            print(parse_te(te))
+            print(util.parse_te(te))
 
         except FileNotFoundError as fnfe:
-            prin(fnfe)
+            print(fnfe)

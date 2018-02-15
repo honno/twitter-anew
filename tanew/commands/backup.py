@@ -2,7 +2,7 @@
 
 from .status import Status
 
-from parse_te import *
+import util
 
 import tweepy
 
@@ -51,6 +51,6 @@ class Backup(Status):
             print("All accounts being followed backed up in {}".format(filename))
                     
         except tweepy.TweepError as te:
-            parse_te(te)
+            util.parse_te(te)
         except FileNotFoundError as fnfe:
             print("Something weird happened with opening the backup file")

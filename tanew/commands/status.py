@@ -6,7 +6,7 @@ import json
 
 import tweepy
 
-from parse_te import *
+import util
 
 class Status(Base):
     def run(self, auth):
@@ -22,4 +22,4 @@ class Status(Base):
             print("Number of accounts {} is following: {}".format(username, following_no))
             
         except tweepy.TweepError as te:
-            print(parse_te(te))
+            print(util.parse_te(te))

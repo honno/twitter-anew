@@ -10,7 +10,7 @@ from time import sleep
 
 from tweepy import TweepError
 
-from parse_te import *
+import util
 
 class LinkAccount(Base):
     def run(self, auth):
@@ -42,4 +42,4 @@ class LinkAccount(Base):
 
                 
         except TweepError as te:
-            print(parse_te(te))
+            print(util.parse_te(te))

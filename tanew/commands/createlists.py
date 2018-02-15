@@ -2,11 +2,13 @@
 
 from .base import Base
 
-from parse_te import *
+import util
 
 import meta
 
 import json
+
+from time import sleep
 
 from datetime import date
 
@@ -55,7 +57,7 @@ class CreateLists(Base):
                 pass
                 
         except tweepy.TweepError as te:
-            print(parse_te(te))
+            print(util.parse_te(te))
 
     def create_list(self, api, name, mode, desc, friends_ids):
         friends_ids_iter = iter(friends_ids)
