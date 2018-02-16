@@ -1,6 +1,6 @@
 # tanew/commands/backup.py
 
-from .status import Status
+from .base import Base
 
 import util
 
@@ -10,12 +10,8 @@ from time import sleep
 
 DEFAULT_BACKUP_FILENAME = 'backup.txt'
 
-class Backup(Status):
+class Backup(Base):
     def run(self, auth):
-        super().run(auth)
-
-        print(self.options)
-        
         try:
             
             file_arg = self.options['<file>']
