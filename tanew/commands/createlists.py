@@ -33,7 +33,7 @@ class CreateLists(Base):
             friends_ids = api.friends_ids() if self.options['<file>'] == None else util.read(self.options['<file>'])
 
             friends_no = friends_ids.__len__()
-            if friends_no > 500:
+            if friends_no > LIST_MAX:
                 friends_ids_matrix = []
                 index = -1
                 while friends_ids.__len__() != 0:
