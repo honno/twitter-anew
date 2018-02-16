@@ -14,23 +14,15 @@ class FollowAll(Base):
         try:
             file_param = self.options['<file>']
             filename = file_param if file_param != None else DEFAULT_BACKUP_FILENAME
-            api = tweepy.API(auth)
+            api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 
-            friends_ids = read(filename)
+            friends_ids = util.read_friends_ids(filename)
             friends_no = friends_ids.__len__()
             
             if friends_no != 0:
 
-                friends_ids_iter = iter(friends_ids)
-                while True:
-                    try:
-
-                        api.create_friendship(friends_ids_iter.__next__())
-                    except tweepy.RateLimitError:
-                        sleep(1)
-                        continue
-                    except StopIteration:
-                        break
+                for friends_id in friends_ids:
+                    api.create_friendship(friends_id)
 
                 print("Jobs done!")
             else:
