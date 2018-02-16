@@ -4,23 +4,17 @@ tanew
 Usage:
   tanew status  
   tanew linkaccount  
-  tanew createlists [<file>] [-n] [--list-name=<name>] [--list-mode=<mode>]
-  tanew backup [<file>] [--user-id=<id>]
-  tanew unfollowall [-n]
-  tanew followall [<file>]  
+  tanew createlists [<file>] [--list-name=<name>] [--list-mode=<mode>] [-v]
+  tanew backup [<file>] [--user-id=<id>] [-v]
+  tanew unfollowall [-v]
+  tanew followall [<file>] [-v]
   tanew -h | --help  
   tanew --version  
 
 Options:
-  -n --no-act  
+  -v --verbose
   -h --help  
   --version  
-
-Examples:
-  skele status
-
-Help:
-  Hmmmm
 """
 
 from inspect import getmembers, isclass

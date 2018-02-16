@@ -1,6 +1,6 @@
 # tanew/commands/status.py
 
-from.base import Base
+from .base import Base
 
 import util
 
