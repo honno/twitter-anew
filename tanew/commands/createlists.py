@@ -30,7 +30,7 @@ class CreateLists(Base):
         try:
             api = tweepy.API(auth)
             
-            friends_ids = api.friends_ids()
+            friends_ids = api.friends_ids() if self.options['<file>'] == None else util.read(self.options['<file>'])
 
             friends_no = friends_ids.__len__()
             if friends_no > 500:
@@ -56,6 +56,9 @@ class CreateLists(Base):
                 
         except tweepy.TweepError as te:
             print(util.parse_te(te))
+        except FileNotFoundError as fnfe:
+            print("Something weird happened with opening the backup file")
+            
 
     def create_list(self, api, name, mode, desc, friends_ids):
         friends_ids_iter = iter(friends_ids)
