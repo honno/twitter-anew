@@ -5,6 +5,7 @@ Usage:
   tanew status  
   tanew linkaccount  
   tanew createlist [<file>] [--list-name=<name>] [--list-mode=<mode>] [-v]
+  tanew addtolist <slug> [<file>] [-v]
   tanew backup [<file>] [--user-id=<id>] [-v]
   tanew unfollowall [-v]
   tanew followall [<file>] [-v]

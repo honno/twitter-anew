@@ -6,25 +6,26 @@ import util
 
 from time import sleep
 
+import logging
+
 class UnfollowAll(Base):
     def run(self, auth):
+        if self.options['--verbose']:
+            logging.basicConfig(level=logging.INFO)
+        log = logging.getLogger(__name__)
 
         try:
-            api = tweepy.API(auth)
+            api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+
             friends_ids = tweepy.Cursor(api.friends_ids).items()
 
-            while True:
-                try:
-                    api.destroy_friendship(friends_ids.next())
-                except tweepy.RateLimitError:
-                    sleep(1)
-                    continue
-                except StopIteration:
-                    break
+            for friend_id in friends_ids:
+                log.error("Unfollowing {}".format(friend_id))
+                api.destroy_friendship(friend_id)
 
             print("Unfollowed everybody!")
                 
         except tweepy.TweepError as te:
-            print(util.parse_te(te))
+            log.error(util.parse_te(te))
 
         
