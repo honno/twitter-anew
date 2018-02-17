@@ -35,14 +35,14 @@ class AddToList(CreateList):
             size = len(friends_ids) + len(friends_ids_known)
 
             if size > 0:
-                if size < meta.LIST_MAX:
-                    list_id = api.get_list(api.me().screen_name, owner, slug_arg).id
-
+                list = api.get_list(api.me().screen_name, owner, slug_arg)
+                list_id = list.id
+                if size <= meta.LIST_MAX:
                     for friends_id in friends_ids:
                         log.info("Adding {} to list".format(friends_id))
                         api.add_list_member(list_id=list_id, id=friends_id)
                 else:
-                    print("dunno")
+                    log.critical("Adding to list for a total member size of over 5000 is not possible")
             else:
                 print("No friends to add")
 

@@ -41,6 +41,7 @@ class CreateList(Base):
 
             friends_no = friends_ids.__len__()
             if friends_no > meta.LIST_MAX:
+                log.warning("Multiple lists are required as there are over 5000 members to create a list")
                 friends_ids_matrix = []
                 index = -1
                 while friends_ids.__len__() != 0:
