@@ -20,7 +20,7 @@ class UnfollowAll(Base):
             friends_ids = tweepy.Cursor(api.friends_ids).items()
 
             for friend_id in friends_ids:
-                log.error("Unfollowing {}".format(friend_id))
+                log.error("Unfollowing user {}".format(friend_id))
                 api.destroy_friendship(friend_id)
 
             print("Unfollowed everybody!")

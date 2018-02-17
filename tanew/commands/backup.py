@@ -20,8 +20,6 @@ class Backup(Base):
         file_arg = self.options['<file>']
         filename = file_arg if file_arg is not None else DEFAULT_BACKUP_FILENAME
 
-        log.info("Writing to {}".format(filename))
-
         try:
             api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 
@@ -35,7 +33,7 @@ class Backup(Base):
             for friend_id in friends_ids_cursor.items():
                 log.info("Storing user {}".format(friend_id))
                 friends_ids.append(friend_id)
-            
+
             with open(filename, 'w+') as f:
                 f.write("List of friend ids followed by {}".format(user_id))
                 f.write('\n\n')
@@ -44,7 +42,7 @@ class Backup(Base):
                     f.write(friend_id.__str__())
                     f.write('\n')
 
-            print("All accounts being followed by {} backed up in {}".format(user_id, filename))
+            print("All accounts being followed by user {} backed up in {}".format(user_id, filename))
 
         except tweepy.TweepError as te:
             log.error(util.parse_te(te))

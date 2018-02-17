@@ -44,10 +44,10 @@ class AddToList(CreateList):
                 else:
                     log.critical("Adding to list for a total member size of over 5000 is not possible")
             else:
-                print("No friends to add")
+                print("No users to add")
 
         except tweepy.TweepError as te:
-            log.exception(util.parse_te(te))
+            log.error(util.parse_te(te))
         except FileNotFoundError as fnfe:
             log.error(fnfe)
 

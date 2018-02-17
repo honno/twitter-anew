@@ -4,34 +4,36 @@ from .base import Base
 
 from .backup import DEFAULT_BACKUP_FILENAME
 
-from time import sleep
+import logging
 
 
 import util
 
 class FollowAll(Base):
     def run(self, auth):
+        if self.options['--verbose']:
+            logging.basicConfig(level=logging.INFO)
+        log = logging.getLogger(__name__)
+
         try:
             file_param = self.options['<file>']
             filename = file_param if file_param != None else DEFAULT_BACKUP_FILENAME
-            api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
-
             friends_ids = util.read_friends_ids(filename)
-            friends_no = friends_ids.__len__()
+
+            api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
             
-            if friends_no != 0:
+            if len(friends_ids) != 0:
 
-                for friends_id in friends_ids:
-                    api.create_friendship(friends_id)
+                for friend_id in friends_ids:
+                    log.info("Following user {}".format(friend_id))
+                    api.create_friendship(friend_id)
 
-                print("Jobs done!")
+                print("All users from {} being followed".format(filename))
             else:
-                print("No friend ids in {}".format(filename))
+                log.critical("No friend ids in {}".format(filename))
 
-
-                    
         except tweepy.TweepError as te:
-            print(util.parse_te(te))
+            log.error(util.parse_te(te))
 
         except FileNotFoundError as fnfe:
-            print(fnfe)
+            log.error(fnfe)
