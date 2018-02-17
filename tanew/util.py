@@ -4,7 +4,7 @@ from re import search as regex_search
 
 
 def parse_te(te):
-    return te.reason
+    return str(te)
 
 def read_friends_ids(file):
     friends_ids = []
