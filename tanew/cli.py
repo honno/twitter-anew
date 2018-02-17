@@ -4,7 +4,7 @@ tanew
 Usage:
   tanew status  
   tanew linkaccount  
-  tanew createlists [<file>] [--list-name=<name>] [--list-mode=<mode>] [-v]
+  tanew createlist [<file>] [--list-name=<name>] [--list-mode=<mode>] [-v]
   tanew backup [<file>] [--user-id=<id>] [-v]
   tanew unfollowall [-v]
   tanew followall [<file>] [-v]
