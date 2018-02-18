@@ -2,9 +2,9 @@
 
 from .base import Base
 
-import util
+import tanew.util as util
 
-import meta
+import tanew.meta as meta
 
 from datetime import date
 

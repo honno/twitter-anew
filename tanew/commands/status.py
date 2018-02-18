@@ -6,7 +6,7 @@ import json
 
 import tweepy
 
-import util
+import tanew.util as util
 
 class Status(Base):
     def run(self, auth):

@@ -2,7 +2,7 @@ import tweepy
 
 from .base import Base
 
-import util
+import tanew.util as util
 
 from time import sleep
 

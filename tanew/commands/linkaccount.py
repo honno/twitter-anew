@@ -10,7 +10,7 @@ import logging
 
 from tweepy import TweepError
 
-import util
+import tanew.util as util
 
 class LinkAccount(Base):
     def run(self, auth):

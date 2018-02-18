@@ -2,8 +2,8 @@ import tweepy
 
 from .createlist import CreateList
 
-import meta
-import util
+import tanew.meta as meta
+import tanew.util as util
 
 import logging
 

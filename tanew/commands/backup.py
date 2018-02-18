@@ -2,7 +2,7 @@
 
 from .base import Base
 
-import util
+import tanew.util as util
 
 import tweepy
 

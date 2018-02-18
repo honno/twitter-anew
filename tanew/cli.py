@@ -26,10 +26,9 @@ import tweepy
 
 import json
 
-from util import *
-from meta import *
+import tanew.util as util
 
-from __init__ import __version__ as VERSION
+from tanew.__init__ import __version__ as VERSION
 
 def main():
     try:
@@ -53,7 +52,7 @@ def main():
             pass
 
         """CLI"""
-        import commands
+        import tanew.commands as commands
         options = docopt(__doc__, version=VERSION)
     
         for k, v in options.items():
@@ -70,5 +69,5 @@ def main():
     except json.decoder.JSONDecodeError as jde:
         print(jde.msg + " in app.json file")
     except tweepy.TweepError as te:
-        print(parse_te(te))
+        print(util.parse_te(te))
         print("Possibly the application pointed to in app.json does not exist?")

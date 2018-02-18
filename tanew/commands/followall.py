@@ -7,7 +7,7 @@ from .backup import DEFAULT_BACKUP_FILENAME
 import logging
 
 
-import util
+import tanew.util as util
 
 class FollowAll(Base):
     def run(self, auth):

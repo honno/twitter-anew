@@ -1,3 +1,3 @@
-from cli import main
+from tanew.cli import main
 
 main()
