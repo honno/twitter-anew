@@ -35,12 +35,24 @@ class AddToList(CreateList):
             size = len(friends_ids) + len(friends_ids_known)
 
             if size > 0:
-                list = api.get_list(api.me().screen_name, owner, slug_arg)
-                list_id = list.id
                 if size <= meta.LIST_MAX:
-                    for friends_id in friends_ids:
-                        log.info("Adding {} to list".format(friends_id))
-                        api.add_list_member(list_id=list_id, id=friends_id)
+                    list = api.get_list(api.me().screen_name, owner, slug_arg)
+                    list_id = list.id
+
+                    friends_ids_matrix = [friends_ids[i:i + meta.CREATE_ALL_MAX] for i in
+                                          range(0, len(friends_ids), meta.CREATE_ALL_MAX)]
+
+                    for friends_ids_slice in friends_ids_matrix:
+                        log.info("Adding users {} to list".format(friends_ids_slice))
+                        api.add_list_members(list_id=list_id, user_id=friends_ids_slice)
+
+                    list_members_cursor = tweepy.Cursor(api.list_members, api.me().screen_name, list.slug)
+                    list_member_count = sum(1 for x in list_members_cursor.items())
+
+                    if list_member_count < len(friends_ids):
+                        log.critical("Failed to add all members to list.")
+                        print("Due to restrictions with the Twitter API, your registered application or user has likely been throttled automatically from adding members to lists, as an anti-spam measure.")
+                        print("Try again in a days time.")
                 else:
                     log.critical("Adding to list for a total member size of over 5000 is not possible")
             else:

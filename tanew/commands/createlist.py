@@ -39,9 +39,11 @@ class CreateList(Base):
             file_arg = self.options['<file>']
             friends_ids = util.read_friends_ids(file_arg) if file_arg is not None else api.friends_ids()
 
-            friends_no = friends_ids.__len__()
+            friends_no = len(friends_ids)
             if friends_no > meta.LIST_MAX:
                 log.warning("Multiple lists are required as there are over 5000 members to create a list")
+                raise NotImplementedError("Creating lists for over 5000 members has not been implemented yet.")
+                """
                 friends_ids_matrix = []
                 index = -1
                 while friends_ids.__len__() != 0:
@@ -54,6 +56,7 @@ class CreateList(Base):
                 for i in range(0, friends_ids_matrix.__len__()):
                     list_name_numbered = list_name + " {}".format(i + 1)
                     self.create_list(log, api, list_name_numbered, list_mode, list_desc, friends_ids_matrix[i])
+                """
             elif friends_no > 0:
                 self.create_list(log, api, list_name, list_mode, list_desc, friends_ids)
             else:
@@ -66,12 +69,27 @@ class CreateList(Base):
                 print("Please use the command 'tanew addtolist <slug>' to add to the existing list at a later point.")
         except FileNotFoundError as fnfe:
             log.error("{} file was not found".format(file_arg))
+        except NotImplementedError as ne:
+            log.error(ne)
+            print("Please contact the author if you'd like to see this functionality, as he needs some motivation first that anybody would require it!")
 
 
     def create_list(self, log, api, name, mode, desc, friends_ids):
         log.info("Creating list {}".format(name))
         twitter_list = api.create_list(name, mode, desc)
 
-        for friends_id in friends_ids:
-            log.info("Adding {} to list".format(friends_id))
-            api.add_list_member(list_id=twitter_list.id, id=friends_id)
+        friends_ids_matrix = [friends_ids[i:i+meta.CREATE_ALL_MAX] for i in range(0, len(friends_ids), meta.CREATE_ALL_MAX)]
+
+        for friends_ids_slice in friends_ids_matrix:
+            log.info("Adding user {} to list".format(friends_ids_slice))
+            api.add_list_members(list_id=twitter_list.id, user_id=friends_ids_slice)
+
+        twitter_list = api.get_list(list_id=twitter_list.id)
+
+        list_members_cursor = tweepy.Cursor(api.list_members, api.me().screen_name, twitter_list.slug)
+        list_member_count = sum(1 for x in list_members_cursor.items())
+
+        if list_member_count < len(friends_ids):
+            log.critical("Failed to add all members to list.")
+            print("Due to restrictions with the Twitter API, your registered application or user has likely been throttled automatically from adding members to lists, as an anti-spam measure.")
+            print("Try again in a days time.")

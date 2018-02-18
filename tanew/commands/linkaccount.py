@@ -20,7 +20,7 @@ class LinkAccount(Base):
             redirect_url = auth.get_authorization_url()
             
             print(redirect_url)
-            webbrowser.open(redirect_url)
+            #webbrowser.open(redirect_url)
             
             pin = input("Press enter pin given to continue: ")
             
