@@ -61,6 +61,9 @@ class CreateList(Base):
 
         except tweepy.TweepError as te:
             log.error(util.parse_te(te))
+            if te.api_code == 104:
+                log.critical("Twitter's API locks users from adding members to lists after a certain point.")
+                print("Please use the command 'tanew addtolist <slug>' to add to the existing list at a later point.")
         except FileNotFoundError as fnfe:
             log.error("{} file was not found".format(file_arg))
 

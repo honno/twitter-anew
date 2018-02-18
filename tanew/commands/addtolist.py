@@ -48,6 +48,8 @@ class AddToList(CreateList):
 
         except tweepy.TweepError as te:
             log.error(util.parse_te(te))
+            if te.api_code == 104:
+                print("Adding members to list locked. Please try again later.")
         except FileNotFoundError as fnfe:
             log.error(fnfe)
 
