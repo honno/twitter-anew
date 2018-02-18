@@ -54,7 +54,6 @@ def main():
             
         except FileNotFoundError:
             pass
-
         """CLI"""
         import tanew.commands as commands
         options = docopt(__doc__, version=VERSION)
@@ -74,6 +73,7 @@ def main():
     except KeyError as ke:
         log.error(ke)
     except tweepy.TweepError as te:
+        print("hi")
         log.error(util.parse_te(te))
         if te.api_code == 32:
             print("The application pointed to in app.json does not exist")

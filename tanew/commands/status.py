@@ -2,7 +2,7 @@
 
 from .base import Base
 
-import json
+import logging
 
 import tweepy
 
@@ -10,8 +10,9 @@ import tanew.util as util
 
 class Status(Base):
     def run(self, auth):
+        log = logging.getLogger(__name__)
         try:
-            
+
             
             username = '@' +  auth.get_username()
             
@@ -22,4 +23,4 @@ class Status(Base):
             print("Number of accounts {} is following: {}".format(username, following_no))
             
         except tweepy.TweepError as te:
-            print(util.parse_te(te))
+            log.error(util.parse_te(te))
