@@ -26,11 +26,15 @@ import tweepy
 
 import json
 
+import logging
+
 import tanew.util as util
 
 from tanew.__init__ import __version__ as VERSION
 
 def main():
+    log = logging.getLogger(__name__)
+
     try:
         app_file = open('app.json')
 
@@ -48,7 +52,7 @@ def main():
 
             auth.set_access_token(token, token_secret)
             
-        except Exception:
+        except FileNotFoundError:
             pass
 
         """CLI"""
@@ -64,10 +68,12 @@ def main():
                 command.run(auth)
 
     except FileNotFoundError as fnfe:
-        print('No application linked to program (app.json)')
-                
+        log.error("No application linked to program (app.json)")
     except json.decoder.JSONDecodeError as jde:
-        print(jde.msg + " in app.json file")
+        log.error(jde)
+    except KeyError as ke:
+        log.error(ke)
     except tweepy.TweepError as te:
-        print(util.parse_te(te))
-        print("Possibly the application pointed to in app.json does not exist?")
+        log.error(util.parse_te(te))
+        if te.api_code == 32:
+            print("The application pointed to in app.json does not exist")
