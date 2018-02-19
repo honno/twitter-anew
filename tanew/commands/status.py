@@ -13,7 +13,7 @@ class Status(Base):
         log = logging.getLogger(__name__)
         try:
 
-            username = '@' + auth.get_username()
+            username = "@{}".format(auth.get_username())
 
             api = tweepy.API(auth)
             following_no = api.friends_ids().__len__()

@@ -2,18 +2,18 @@
 tanew
 
 Usage:
-  tanew status  
-  tanew linkaccount  
-  tanew createlist [<file>] [--list-name=<name>] [--list-mode=<mode>] [-v]
-  tanew addtolist <slug> [<file>] [-v]
-  tanew backup [<file>] [--user-id=<id>] [-v]
-  tanew unfollowall [-v]
-  tanew followall [<file>] [-v]
+  tanew status  Check what account is linked to application, if any.
+  tanew linkaccount  Link a twitter account to application.
+  tanew createlist [<file>] [-v] [--list-name=<name>] [--list-mode=<mode>]  Create a twitter list of all users the linked account follows, or the list of user ids specified in the file parameter.
+  tanew addtolist <slug> [-v] [<file>]  Add to an existing list (identified by the slug) the members of all users the linked account follows, or the list of user ids specified in the file parameter.
+  tanew backup [<file>] [-v] [--user-id=<id>]  Store all users the linked account follows or the specified user to a backup file (default backup.txt).
+  tanew unfollowall [-v]  Unfollow every user the linked account follows.
+  tanew followall <file> [-v]  Follow every user specified in the file parameter.
   tanew -h | --help  
   tanew --version  
 
 Options:
-  -v --verbose
+  -v --verbose  Contain detailed information on the current operations being executed by the application.
   -h --help  
   --version  
 """
