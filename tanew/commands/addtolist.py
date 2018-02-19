@@ -1,11 +1,10 @@
-import tweepy
+import logging
 
-from .createlist import CreateList
+import tweepy
 
 import tanew.meta as meta
 import tanew.util as util
-
-import logging
+from .createlist import CreateList
 
 
 class AddToList(CreateList):
@@ -23,7 +22,6 @@ class AddToList(CreateList):
             owner = api.me().screen_name
 
             slug_arg = self.options['<slug>']
-
 
             friends_ids_known = []
             list_members_cursor = tweepy.Cursor(api.list_members, owner, slug_arg)
@@ -58,5 +56,3 @@ class AddToList(CreateList):
             log.error(util.parse_te(te))
         except FileNotFoundError as fnfe:
             log.error(fnfe)
-
-

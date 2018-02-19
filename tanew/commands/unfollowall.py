@@ -1,12 +1,10 @@
+import logging
+
 import tweepy
 
+import tanew.util as util
 from .base import Base
 
-import tanew.util as util
-
-from time import sleep
-
-import logging
 
 class UnfollowAll(Base):
     def run(self, auth):
@@ -24,8 +22,6 @@ class UnfollowAll(Base):
                 api.destroy_friendship(friend_id)
 
             print("Unfollowed everybody!")
-                
+
         except tweepy.TweepError as te:
             log.error(util.parse_te(te))
-
-        

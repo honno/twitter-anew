@@ -1,14 +1,14 @@
 # tanew/commands/backup.py
 
-from .base import Base
-
-import tanew.util as util
+import logging
 
 import tweepy
 
-import logging
+import tanew.util as util
+from .base import Base
 
 DEFAULT_BACKUP_FILENAME = 'backup.txt'
+
 
 class Backup(Base):
 

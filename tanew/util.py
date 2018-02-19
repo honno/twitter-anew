@@ -1,7 +1,5 @@
-import json
-
-from re import search as regex_search
 import tweepy
+
 
 def parse_te(te):
     msg = te
@@ -13,6 +11,7 @@ def parse_te(te):
     finally:
         return msg
 
+
 def read_friends_ids(file):
     friends_ids = []
     with open(file, 'r') as f:
@@ -23,6 +22,7 @@ def read_friends_ids(file):
             except ValueError:
                 pass
     return friends_ids
+
 
 def check_list_size(api, twitter_list, expected_size):
     list_members_cursor = tweepy.Cursor(api.list_members, api.me().screen_name, twitter_list.slug)

@@ -18,19 +18,16 @@ Options:
   --version  
 """
 
+import json
+import logging
 from inspect import getmembers, isclass
 
+import tweepy
 from docopt import docopt
 
-import tweepy
-
-import json
-
-import logging
-
 import tanew.util as util
-
 from tanew.__init__ import __version__ as VERSION
+
 
 def main():
     log = logging.getLogger(__name__)
@@ -46,18 +43,18 @@ def main():
         try:
             access_tokens_file = open('access_tokens.json')
             access_tokens = json.load(access_tokens_file)
-            
+
             token = access_tokens['token']
             token_secret = access_tokens['token_secret']
 
             auth.set_access_token(token, token_secret)
-            
+
         except FileNotFoundError:
             pass
         """CLI"""
         import tanew.commands as commands
         options = docopt(__doc__, version=VERSION)
-    
+
         for k, v in options.items():
             if hasattr(commands, k) and v:
                 module = getattr(commands, k)

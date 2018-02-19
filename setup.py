@@ -1,4 +1,5 @@
 from setuptools import setup, find_packages
+
 from tanew.__init__ import __version__ as VERSION
 
 requirements = ['tweepy', 'requests_oauthlib', 'docopt']

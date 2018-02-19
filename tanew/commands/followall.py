@@ -1,13 +1,11 @@
-import tweepy
-
-from .base import Base
-
-from .backup import DEFAULT_BACKUP_FILENAME
-
 import logging
 
+import tweepy
 
 import tanew.util as util
+from .backup import DEFAULT_BACKUP_FILENAME
+from .base import Base
+
 
 class FollowAll(Base):
     def run(self, auth):
@@ -21,7 +19,7 @@ class FollowAll(Base):
             friends_ids = util.read_friends_ids(filename)
 
             api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
-            
+
             if len(friends_ids) != 0:
 
                 for friend_id in friends_ids:
