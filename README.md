@@ -6,7 +6,15 @@ Useful tools for your fresh start include:
 * Creating a Twitter list that stores everyone you're following
 * Generating a backup file that stores all users you currently follow
 * Unfollowing everyone!
-* And god forbid you want to follow them all again, you can just use that backup file
+* God forbid you want to follow them all again, you can do that too
+
+## Table of Contents
+
+* [Installation](#installation)
+* [Setup](#setup)
+* [Usage](#usage)
+* [TODO](#todo)
+* [License](#todo)
 
 ## Installation
 
@@ -66,19 +74,53 @@ And now you're ready to run the `tanew` client! Test the application is linked p
 ```
 Usage:
   tanew status
-    Check what account is linked to application, if any.
   tanew linkaccount
-    Link a twitter account to application.
   tanew createlist [<file>] [-v] [--list-name=<name>] [--list-mode=<mode>]
-    Create a twitter list of all users specified.
   tanew addtolist <slug> [-v] [<file>]
-    Add to an existing list specified members.
   tanew backup [-v] [<file>] [--user-id=<id>]
-    Store all users the specified account follows.
   tanew unfollowall [-v]
-    Unfollow every user the linked account follows.
   tanew followall <file> [-v]
-    Follow every user specified in the file parameter.
   tanew -h | --help  
   tanew --version
 ```
+
+### status
+Check what account is linked to the application, if any.
+
+### linkaccount
+Generates an authorization request link for you to open. Upon accepting the request, twitter.com gives you a link which you can enter in the command line interface to register your account with the `tanew` application.
+
+### createlist
+Create a twitter list of all users followed by your linked account, or the users listed in the optional `file` parameter. The `--list-name` parameter dictates the list's name (default "Old"), and the `--list-mode` parameter determines whether the list generate is private or public (default private).
+
+### addtolist
+Add to an existing list (identified by the required `slug` parameter) all users followed by your linked account, or the users listed in the optional `file` parameter.
+
+The slug is the shorthand name for the list that shows up in your browser, typically the full-name of the list (i.e. if my list "Old" has the url `twitter.com/lists/old`, then the slug is `old`).
+
+### backup
+Store all users followed by your linked account or the user specified in `--user-id` parameter to a backup file. By default this is `backup.txt`, but a different file to store the list can be specified in the `file` parameter.
+
+### unfollowall
+Unfollow every user your linked account follows.
+
+### followall
+Follow every user specified in the required `file` parameter.
+
+### What is \[-v\]?
+The optional `v` parameter stands for 'verbose'. When this option is used, detailed information on the current operations being executed by the application are displayed on the terminal.
+
+## TODO
+
+* Code review is probably necessary 'coz I imagine it's all a bit messy
+* Document code that do weird specific things
+* Have `addtolist` generate new lists if the `List_MAX` is exceeded
+* Have a more detailed `setup.py`
+* Use proper versioning
+* Better handling of Twitter's silent throttling? Need to think how'd that work
+
+The above would all be nice, but I'm probably done with this unless folk would ever want to use this heh. The utility was definitely important for my own personal use, but really this whole project was a learning experience.
+
+## License
+
+*Twitter Anew* is licensed under [MIT](/doc/MIT-LICENSE.txt) :)
