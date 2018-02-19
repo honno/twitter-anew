@@ -12,7 +12,7 @@ Useful tools for your fresh start include:
 
 *Twitter Anew* is made in Python3, so [you'll need that first](https://www.python.org/downloads/).
 
-The following Python packages are required: `docopt`, `tweepy` & `requests_oauthlib`. You can use pip to install them all as follows.
+The following Python packages are required: `docopt`, `tweepy` & `requests_oauthlib`. You can use pip to install them all.
 ```bash
 pip install docopt tweepy requests_oauthlib
 ```
@@ -22,7 +22,7 @@ We can't forget to download this repository.
 git clone https://github.com/Honno/twitter-anew.git
 ```
 
-Enter the new directory created by the clone... 
+Enter the new directory created by the clone.
 ```bash
 cd twitter-anew
 ```
@@ -32,11 +32,11 @@ And install the program like so.
 python setup.py install --user
 ```
 
-Now just run any command you like with `tanew <command>`, but be aware you **need to register a Twitter application** first!
+Now you can't quite run the `tanew` program yet—**you'll need to register a Twitter application first!**
 
 ## Setup
 
-So Twitter requires all API requests, such as those used in this application, be handled by a registered application. For security reasons I haven't distributed my own application's keys and such, but have no fear for it's a really simple process.
+So Twitter requires all API requests, such as those used in *Twitter Anew*, to be handled by a "registered application". For security reasons and such I haven't distributed my own application's keys, but fortunately it's a really simple process.
 
 Being signed in on twitter, go to [apps.twitter.com](https://apps.twitter.com/) and press the 'Create New App' button. Fill out the necessary details in the [form](/doc/scr/create_an_app.png) presented and proceed.
 ![who](/doc/scr/create_new_app.png)
@@ -47,16 +47,17 @@ Presented with the following window, first go to the 'Permissions' tab.
 Change the permissions from 'Read only' to 'Read and Write'.
 ![these](/doc/scr/app_permissions.png)
 
-Now go to 'Key and Acces tokens' and take note of the subsequent strings after the 'Consumer Key' and 'Consumer Secret' rows.
+Now go to 'Key and Acces tokens' tab and take note of the subsequent strings after the 'Consumer Key' and 'Consumer Secret' rows.
 ![things](/doc/scr/app_tokens.png)
 
-This is the information you'll need to provide to the *Twitter Anew* client. Create a file called `app.json` in the directory you installed this program (i.e. the same folder this README.md is in), and attribute the two strings mentioned above `key` and `secret` respectively. For the above example, `app.json` would read as follows:
+This is the information you'll need to provide to the *Twitter Anew* client before it can be used. We're using a `json` file to store this (learn about how it works [here](https://www.w3schools.com/js/js_json_syntax.asp)). Create a file called `app.json` in the directory you installed this program (i.e. the same folder this README.md is in), and attribute the two strings mentioned above `key` and `secret` respectively. For the above example, `app.json` would read as follows:
 ```json
 {
-  "key": "das",
-  "secret": "sadas"
+  "key": "ZyNhLthaYl7giOSEvr3k4tXZc",
+  "secret": "J06jGiee9fYPQdeau9hlNXcnSypKJAs3us9R4f1EMuhtWQeqaE"
 }
 ```
+You would just replace the weird looking strings with the ones from your own application.
 
 And now you're ready to run the `tanew` client! Test the application is linked properly with the `tanew status` command.
 
