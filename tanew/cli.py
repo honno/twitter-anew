@@ -3,26 +3,19 @@ tanew
 
 Usage:
   tanew status
-    Check what account is linked to application, if any.
   tanew linkaccount
-    Link a twitter account to application.
   tanew createlist [<file>] [-v] [--list-name=<name>] [--list-mode=<mode>]
-    Create a twitter list of all users specified.
   tanew addtolist <slug> [-v] [<file>]
-    Add to an existing list specified members.
   tanew backup [-v] [<file>] [--user-id=<id>]
-    Store all users the specified account follows.
   tanew unfollowall [-v]
-    Unfollow every user the linked account follows.
   tanew followall <file> [-v]
-    Follow every user specified in the file parameter.
   tanew -h | --help  
   tanew --version  
 
 Options:
-  -v --verbose  Contain detailed information on the current operations being executed by the application.
-  -h --help  
-  --version  
+  -v --verbose
+  -h --hel
+  --version
 """
 
 import json
