@@ -16,7 +16,7 @@ class Status(Base):
             username = "@{}".format(auth.get_username())
 
             api = tweepy.API(auth)
-            following_no = api.friends_ids().__len__()
+            following_no = len(api.friends_ids())
 
             print("{} is linked".format(username))
             print("Number of accounts {} is following: {}".format(username, following_no))

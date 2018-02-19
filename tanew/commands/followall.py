@@ -26,7 +26,7 @@ class FollowAll(Base):
                     log.info("Following user {}".format(friend_id))
                     api.create_friendship(friend_id)
 
-                print("All users from {} being followed".format(filename))
+                print("All users from {} followed!".format(filename))
             else:
                 log.critical("No friend ids in {}".format(filename))
 

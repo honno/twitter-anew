@@ -11,4 +11,4 @@ class Base(object):
         self.kwargs = kwargs
 
     def run(self, auth):
-        raise NotImplementedError('You must implement the run() method yourself!')
+        raise NotImplementedError("This ain't ever gunna be implemented kid")

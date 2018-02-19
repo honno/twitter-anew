@@ -45,23 +45,21 @@ class CreateList(Base):
                 friends_ids_matrix = [friends_ids[i:i + meta.LIST_MAX] for i in
                                       range(0, len(friends_ids), meta.LIST_MAX)]
 
-                for friends_ids_block in friends_ids_matrix:
+                for i, friends_ids_block in enumerate(friends_ids_matrix):
                     list_name_numbered = list_name + " {}".format(i + 1)
-                    self.create_list(log, api, list_name_numbered, list_mode, list_desc, friends_ids_block)
+                    if self.create_list(log, api, list_name_numbered, list_mode, list_desc, friends_ids_block):
+                        log.critical("Generation of lists aborted")
+                        break
 
             elif friends_no > 0:
                 self.create_list(log, api, list_name, list_mode, list_desc, friends_ids)
             else:
-                print("No user ids found!")
+                print("No user ids found")
 
         except tweepy.TweepError as te:
             log.error(util.parse_te(te))
         except FileNotFoundError as fnfe:
             log.error("{} file was not found".format(file_arg))
-        except NotImplementedError as ne:
-            log.error(ne)
-            print(
-                "Please contact the author if you'd like to see this functionality, as he needs some motivation first that anybody would require it!")
 
     def create_list(self, log, api, name, mode, desc, friends_ids):
         log.info("Creating list {}".format(name))
@@ -74,6 +72,10 @@ class CreateList(Base):
             log.info("Adding user {} to list".format(friends_ids_slice))
             api.add_list_members(list_id=twitter_list.id, user_id=friends_ids_slice)
 
-        if util.check_list_size(api, twitter_list, len(friends_ids)):
+        success = util.check_list_size(api, twitter_list, len(friends_ids))
+
+        if not success:
             log.critical(meta.LIST_SIZE_UNDER_LOG)
             print(meta.LIST_SIZE_UNDER_PRINT)
+
+        return success

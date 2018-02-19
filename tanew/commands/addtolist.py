@@ -48,7 +48,7 @@ class AddToList(CreateList):
                         log.critical(meta.LIST_SIZE_UNDER_LOG)
                         print(meta.LIST_SIZE_UNDER_PRINT)
                 else:
-                    log.critical("Adding to list for a total member size of over 5000 is not possible")
+                    log.critical("Adding to list for a total member size of over {} is not possible".format(meta.LIST_MAX))
             else:
                 print("No users to add")
 
