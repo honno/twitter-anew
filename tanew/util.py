@@ -23,3 +23,9 @@ def read_friends_ids(file):
             except ValueError:
                 pass
     return friends_ids
+
+def check_list_size(api, twitter_list, expected_size):
+    list_members_cursor = tweepy.Cursor(api.list_members, api.me().screen_name, twitter_list.slug)
+    list_member_count = sum(1 for x in list_members_cursor.items())
+
+    return list_member_count < expected_size
