@@ -113,7 +113,7 @@ The optional `v` parameter stands for 'verbose'. When this option is used, detai
 ## TODO
 
 * Code review is probably necessary 'coz I imagine it's all a bit messy
-* Document code that do weird specific things
+* Document code that does weird specific things
 * Have `addtolist` generate new lists if the `List_MAX` is exceeded
 * Have a more detailed `setup.py`
 * Use proper versioning
