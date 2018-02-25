@@ -28,7 +28,7 @@ class AddToList(CreateList):
             for user in list_members_cursor.items():
                 friends_ids_known.append(user.id)
 
-            friend_ids = [id for id in friends_ids if id not in friends_ids_known]
+            friends_ids = [id for id in friends_ids if id not in friends_ids_known]
 
             size = len(friends_ids) + len(friends_ids_known)
 
