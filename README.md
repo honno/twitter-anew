@@ -3,10 +3,11 @@
 If you follow so many people on twitter that your feed becomes an endless 24/7 deluge of depressing hot takes about why everything sucks, then *Twitter Anew* may just be for you.
 
 Useful tools for your fresh start include:
-* Creating a Twitter list that stores everyone you're following
-* Generating a backup file that stores all users you currently follow
+* Creating a Twitter list that stores everyone you're following.
+* Generating a backup file that stores all users you currently follow.
 * Unfollowing everyone!
-* God forbid you want to follow them all again, you can do that too
+
+And God forbid you want to follow them all again, you can do that too.
 
 ## Table of Contents
 
@@ -71,7 +72,7 @@ And now you're ready to run the `tanew` client! Test the application is linked p
 
 ## Usage
 
-```
+```bash
 Usage:
   tanew status
   tanew linkaccount
@@ -112,14 +113,14 @@ The optional `v` parameter stands for 'verbose'. When this option is used, detai
 
 ## TODO
 
-* Code review is probably necessary 'coz I imagine it's all a bit messy
-* Document code that does weird specific things
-* Have `addtolist` generate new lists if the `List_MAX` is exceeded
-* Have a more detailed `setup.py`
-* Use proper versioning
+* Code review is probably necessary 'coz I imagine it's all a bit messy.
+* Document code that does weird specific things.
+* Have `addtolist` generate new lists if the `LIST_MAX` is exceeded.
+* Have a more detailed `setup.py`.
+* Use proper versioning.
 * Better handling of Twitter's silent throttling? Need to think how'd that work
 
-The above would all be nice, but I'm probably done with this unless folk would ever want to use this heh. The utility was definitely important for my own personal use, but really this whole project was a learning experience.
+The above would all be nice, but I'm probably done with this unless folk would ever want to use this heh. The utility was important for my own personal use, but really this whole project was a learning experience.
 
 ## License
 
